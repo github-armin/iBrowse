@@ -92,6 +92,9 @@
                             <constraint firstItem="4BS-C4-JK6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="pP6-xG-F6c"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="mDI-RN-H7g" id="R47-RD-0bk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

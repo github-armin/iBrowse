@@ -9,25 +9,46 @@
 import UIKit
 import WebKit
 
-class iBrowseController: UIViewController {
+class iBrowseController: UIViewController, UITextFieldDelegate, WKNavigationDelegate {
 
     var webView:WKWebView!
+    
+    @IBOutlet weak var textField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        webView = WKWebView(frame: CGRect(x: 0, y: 60, width: view.frame.size.width, height: view.frame.size.height))
+        //webView = WKWebView(frame: CGRect(x: 0, y: 60, width: view.frame.size.width, height: view.frame.size.height))
+        webView = WKWebView()
         view.addSubview(webView)
-        let url:URL = URL(string: "https://google.com")!
+        
+        webView.navigationDelegate = self
+        
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        let width = NSLayoutConstraint(item: webView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1.0, constant: 0)
+        let height = NSLayoutConstraint(item: webView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 1.0, constant: -60)
+        let top = NSLayoutConstraint(item: webView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 60)
+        view.addConstraints([width, height, top])
+    }
+
+    
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        textField.text = "\(webView.url!)"
+    }
+    
+//    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+//        textField.text = "hello!"
+//    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let url:URL = URL(string: textField.text!)!
         let req:URLRequest = URLRequest(url: url)
         webView.load(req)
+        textField.resignFirstResponder()
+        textField.text = "\(url)"
+        return false
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 
