@@ -25,7 +25,7 @@ class iBrowseController: UIViewController, UITextFieldDelegate, WKNavigationDele
         view.addSubview(webView)
         
         webView.navigationDelegate = self
-        
+        webView.allowsBackForwardNavigationGestures = true
         webView.translatesAutoresizingMaskIntoConstraints = false
         let width = NSLayoutConstraint(item: webView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1.0, constant: 0)
         let height = NSLayoutConstraint(item: webView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 1.0, constant: -60)
@@ -38,6 +38,8 @@ class iBrowseController: UIViewController, UITextFieldDelegate, WKNavigationDele
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         textField.text = "\(webView.url!)"
         progressBar.setProgress(Float(webView.estimatedProgress), animated: true)
+        let diff:Float = 1 - Float(webView.estimatedProgress)
+        progressBar.setProgress(diff, animated: true)
     }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         progressBar.setProgress(0, animated: false)
