@@ -15,6 +15,8 @@ class iBrowseController: UIViewController, UITextFieldDelegate, WKNavigationDele
     
     @IBOutlet weak var textField: UITextField!
     
+    @IBOutlet weak var progressBar: UIProgressView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -29,17 +31,17 @@ class iBrowseController: UIViewController, UITextFieldDelegate, WKNavigationDele
         let height = NSLayoutConstraint(item: webView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 1.0, constant: -60)
         let top = NSLayoutConstraint(item: webView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 60)
         view.addConstraints([width, height, top])
+        
+        progressBar.setProgress(0, animated: false)
     }
-
     
     func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         textField.text = "\(webView.url!)"
+        progressBar.setProgress(Float(webView.estimatedProgress), animated: true)
     }
-    
-//    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//        textField.text = "hello!"
-//    }
-    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        progressBar.setProgress(0, animated: false)
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let url:URL = URL(string: textField.text!)!
