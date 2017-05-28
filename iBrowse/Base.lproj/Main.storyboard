@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Browse Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="iBrowse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="iBrowseController" customModule="iBrowse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -31,6 +31,9 @@
                                             <constraint firstAttribute="height" constant="30" id="uRV-Ng-M6V"/>
                                         </constraints>
                                         <state key="normal" title="&lt;"/>
+                                        <connections>
+                                            <action selector="goBack" destination="dkx-z0-nzr" eventType="touchUpInside" id="p72-44-Ied"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vr-ax-Isx">
                                         <rect key="frame" x="38" y="5" width="30" height="30"/>
@@ -39,6 +42,9 @@
                                             <constraint firstAttribute="width" constant="30" id="tYB-bi-v88"/>
                                         </constraints>
                                         <state key="normal" title="&gt;"/>
+                                        <connections>
+                                            <action selector="goForward" destination="dkx-z0-nzr" eventType="touchUpInside" id="aeC-be-Vc6"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWJ-aS-ibx">
                                         <rect key="frame" x="337" y="5" width="30" height="30"/>
@@ -47,6 +53,9 @@
                                             <constraint firstAttribute="height" constant="30" id="b6o-Eo-MYI"/>
                                         </constraints>
                                         <state key="normal" title="r"/>
+                                        <connections>
+                                            <action selector="reload" destination="dkx-z0-nzr" eventType="touchUpInside" id="LcO-hI-7zu"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mDI-RN-H7g">
                                         <rect key="frame" x="72" y="5" width="261" height="30"/>
@@ -55,7 +64,10 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="go"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="T7r-zc-jFO"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
